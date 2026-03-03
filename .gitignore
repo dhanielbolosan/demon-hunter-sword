@@ -1,2 +1,6 @@
 .godot/
 .DS_Store
+export/
+exports/
+build/
+builds/
