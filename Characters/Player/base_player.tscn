@@ -1,37 +1,109 @@
 [gd_scene format=3 uid="uid://noend2vfkcav"]
 
 [ext_resource type="PackedScene" uid="uid://6o6dni8y642b" path="res://Models/base_character.fbx" id="1_2eps5"]
-[ext_resource type="Animation" uid="uid://d246vvy16wygj" path="res://Animations/base_idle.res" id="2_1efyy"]
-[ext_resource type="Animation" uid="uid://8x7gw0du3w5m" path="res://Animations/base_run.res" id="3_rlv28"]
+[ext_resource type="Animation" uid="uid://d246vvy16wygj" path="res://Animations/player_idle.res" id="2_1efyy"]
+[ext_resource type="Animation" uid="uid://8x7gw0du3w5m" path="res://Animations/player_run.res" id="3_rlv28"]
+[ext_resource type="Animation" uid="uid://b2svl4eo6jbt4" path="res://Animations/player_demon_idle.res" id="4_1jkbj"]
+[ext_resource type="Animation" uid="uid://cx7of5sjwhqep" path="res://Animations/player_demon_run.res" id="5_pw4m1"]
+[ext_resource type="Animation" uid="uid://bfknu3gujy482" path="res://Animations/player_gs_idle.res" id="6_t5l2l"]
+[ext_resource type="Animation" uid="uid://dbj0pv845jpog" path="res://Animations/player_gs_run.res" id="7_vdjot"]
+[ext_resource type="Animation" uid="uid://bfxtesblxt2hj" path="res://Animations/player_soul_switch.res" id="8_fye4e"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e1w4v"]
 _data = {
 &"base_idle": ExtResource("2_1efyy"),
-&"base_run": ExtResource("3_rlv28")
+&"base_run": ExtResource("3_rlv28"),
+&"player_demon_idle": ExtResource("4_1jkbj"),
+&"player_demon_run": ExtResource("5_pw4m1"),
+&"player_gs_idle": ExtResource("6_t5l2l"),
+&"player_gs_run": ExtResource("7_vdjot"),
+&"player_soul_switch": ExtResource("8_fye4e")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rlv28"]
-animation = &"base_animations/base_run"
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_r6bm4"]
+sync = true
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2eps5"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4bcje"]
+animation = &"base_animations/player_demon_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olop8"]
+animation = &"base_animations/player_demon_run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bq3rp"]
 animation = &"base_animations/base_idle"
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_1efyy"]
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_cnjh5"]
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8rofl"]
+animation = &"base_animations/base_run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xbw6i"]
+animation = &"base_animations/player_soul_switch"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xwg7r"]
+sync = true
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_c7eij"]
+input_0/name = "Demon"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Hunter"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Sword"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_okrdr"]
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_get4f"]
+animation = &"base_animations/player_gs_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nso5f"]
+animation = &"base_animations/player_gs_run"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1jkbj"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e1w4v"]
-graph_offset = Vector2(-230.6442, -132.13765)
-nodes/output/position = Vector2(500, 60)
-nodes/Anum_idle/node = SubResource("AnimationNodeAnimation_2eps5")
-nodes/Anum_idle/position = Vector2(-280, 0)
-nodes/Anim_run/node = SubResource("AnimationNodeAnimation_rlv28")
-nodes/Anim_run/position = Vector2(-280, 240)
-nodes/Run/node = SubResource("AnimationNodeBlend2_1efyy")
-nodes/Run/position = Vector2(180, 40)
-node_connections = [&"output", 0, &"Run", &"Run", 0, &"Anum_idle", &"Run", 1, &"Anim_run"]
+graph_offset = Vector2(65.082275, 375.64758)
+nodes/output/position = Vector2(1120, 680)
+nodes/Soul_Switch/node = SubResource("AnimationNodeOneShot_xwg7r")
+nodes/Soul_Switch/position = Vector2(900, 680)
+nodes/Demon_Idle/node = SubResource("AnimationNodeAnimation_4bcje")
+nodes/Demon_Idle/position = Vector2(-380, 380)
+"nodes/Soul_Switch 2/node" = SubResource("AnimationNodeAnimation_xbw6i")
+"nodes/Soul_Switch 2/position" = Vector2(400, 1120)
+nodes/Soul_Switch_Trans/node = SubResource("AnimationNodeTransition_c7eij")
+nodes/Soul_Switch_Trans/position = Vector2(560, 680)
+nodes/Hunter_Blend/node = SubResource("AnimationNodeBlend2_cnjh5")
+nodes/Hunter_Blend/position = Vector2(120, 740)
+nodes/Demon_Blend/node = SubResource("AnimationNodeBlend2_r6bm4")
+nodes/Demon_Blend/position = Vector2(120, 420)
+nodes/Sword_Blend/node = SubResource("AnimationNodeBlend2_okrdr")
+nodes/Sword_Blend/position = Vector2(120, 1040)
+nodes/Hunter_Run/node = SubResource("AnimationNodeAnimation_8rofl")
+nodes/Hunter_Run/position = Vector2(-380, 860)
+nodes/Hunter+Idle/node = SubResource("AnimationNodeAnimation_bq3rp")
+nodes/Hunter+Idle/position = Vector2(-380, 700)
+nodes/Demon_Run/node = SubResource("AnimationNodeAnimation_olop8")
+nodes/Demon_Run/position = Vector2(-380, 540)
+nodes/Sword_Run/node = SubResource("AnimationNodeAnimation_nso5f")
+nodes/Sword_Run/position = Vector2(-380, 1180)
+nodes/Sword_Idle/node = SubResource("AnimationNodeAnimation_get4f")
+nodes/Sword_Idle/position = Vector2(-380, 1020)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_1jkbj")
+nodes/TimeScale/position = Vector2(740, 1060)
+node_connections = [&"output", 0, &"Soul_Switch", &"Soul_Switch", 0, &"Soul_Switch_Trans", &"Soul_Switch", 1, &"TimeScale", &"Soul_Switch_Trans", 0, &"Demon_Blend", &"Soul_Switch_Trans", 1, &"Hunter_Blend", &"Soul_Switch_Trans", 2, &"Sword_Blend", &"Hunter_Blend", 0, &"Hunter+Idle", &"Hunter_Blend", 1, &"Hunter_Run", &"Demon_Blend", 0, &"Demon_Idle", &"Demon_Blend", 1, &"Demon_Run", &"Sword_Blend", 0, &"Sword_Idle", &"Sword_Blend", 1, &"Sword_Run", &"TimeScale", 0, &"Soul_Switch 2"]
 
 [node name="base" unique_id=945627658 instance=ExtResource("1_2eps5")]
 
-[node name="Skeleton3D" parent="." index="1" unique_id=1511226377]
+[node name="Skeleton3D" parent="." index="1" unique_id=1046969840]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 bones/0/position = Vector3(0.018975517, 4.062699, -0.056400873)
 bones/0/rotation = Quaternion(-0.036080886, -0.36562178, -0.014166712, 0.929956)
@@ -69,10 +141,20 @@ bones/37/rotation = Quaternion(-0.2983111, 0.07440133, 0.0006629836, 0.95156425)
 bones/38/rotation = Quaternion(0.6147962, 0.015332036, 0.14756832, 0.7746059)
 bones/39/rotation = Quaternion(0.33247542, -0.13900772, 0.04356151, 0.9317937)
 
-[node name="AnimationPlayer" parent="." index="2" unique_id=735360135]
+[node name="AnimationPlayer" parent="." index="2" unique_id=672473608]
 libraries/base_animations = SubResource("AnimationLibrary_e1w4v")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="3" unique_id=1793589961]
+process_mode = 3
 tree_root = SubResource("AnimationNodeBlendTree_e1w4v")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Run/blend_amount = 0.0
+parameters/Soul_Switch/active = false
+parameters/Soul_Switch/internal_active = false
+parameters/Soul_Switch/request = 0
+parameters/Soul_Switch_Trans/current_state = "Hunter"
+parameters/Soul_Switch_Trans/transition_request = ""
+parameters/Soul_Switch_Trans/current_index = 1
+parameters/Hunter_Blend/blend_amount = 0.0
+parameters/Demon_Blend/blend_amount = 0.0
+parameters/Sword_Blend/blend_amount = 0.0
+parameters/TimeScale/scale = 2.0
