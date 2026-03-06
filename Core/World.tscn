@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bss3a6uto7uuk"]
 
-[ext_resource type="PackedScene" uid="uid://dgqv7is6u3vbs" path="res://Scenes/Player.tscn" id="1_5cjrv"]
+[ext_resource type="PackedScene" uid="uid://dgqv7is6u3vbs" path="res://Core/Player.tscn" id="1_bwlf7"]
 
 [node name="World" type="Node3D" unique_id=1254128625]
 
@@ -12,5 +12,4 @@ shadow_enabled = true
 use_collision = true
 size = Vector3(100, 0.1, 100)
 
-[node name="Player" parent="." unique_id=423511119 instance=ExtResource("1_5cjrv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022337914, 0)
+[node name="Player" parent="." unique_id=423511119 instance=ExtResource("1_bwlf7")]
