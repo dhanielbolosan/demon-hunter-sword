@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dgqv7is6u3vbs"]
+
+[ext_resource type="Script" uid="uid://tyy61w6s32lc" path="res://Scripts/Player/Player.gd" id="1_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://noend2vfkcav" path="res://Scenes/Player/base_player.tscn" id="2_kyqiw"]
+[ext_resource type="Script" uid="uid://bar36kbbdvyky" path="res://Scripts/States/State Machine.gd" id="3_wnikf"]
+[ext_resource type="Script" uid="uid://c8uil57b28lg5" path="res://Scripts/Player/PlayerRun.gd" id="4_8rshm"]
+[ext_resource type="Script" uid="uid://baq2f7i3k7gme" path="res://Scripts/Player/PlayerIdle.gd" id="5_pwyei"]
+[ext_resource type="Script" uid="uid://dwjbqu3ass78i" path="res://Scripts/Player/PlayerSwitch.gd" id="6_pwyei"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyqiw"]
+height = 8.019119
+
+[node name="Player" type="CharacterBody3D" unique_id=423511119]
+script = ExtResource("1_kyqiw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=896002693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0172005, 0)
+shape = SubResource("CapsuleShape3D_kyqiw")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=774164690]
+transform = Transform3D(0.70710677, -0.40860704, 0.5770964, 0, 0.8161376, 0.5778576, -0.70710677, -0.40860704, 0.5770964, 20, 10, 20)
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1318864502]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 2.9802322e-08, 1, 0, 10, 10)
+projection = 1
+size = 40.0
+
+[node name="Model" parent="." unique_id=945627658 instance=ExtResource("2_kyqiw")]
+
+[node name="State Machine" type="Node" parent="." unique_id=1357101894 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_wnikf")
+initial_state = NodePath("Idle")
+
+[node name="Run" type="Node" parent="State Machine" unique_id=1600034497 node_paths=PackedStringArray("player")]
+script = ExtResource("4_8rshm")
+player = NodePath("../..")
+
+[node name="Idle" type="Node" parent="State Machine" unique_id=1616360723 node_paths=PackedStringArray("player")]
+script = ExtResource("5_pwyei")
+player = NodePath("../..")
+
+[node name="Switch" type="Node" parent="State Machine" unique_id=1450719744 node_paths=PackedStringArray("player")]
+script = ExtResource("6_pwyei")
+player = NodePath("../..")
